@@ -14,4 +14,15 @@ __version__ = "0.0.1"
 __author__ = "Uítalo Souza"
 __license__ = "Unlicense"
 
-print("hello")
+import os
+
+current_language = os.getenv("LANG")[:5]
+msg = "hello Python"
+
+
+if current_language == "pt_BR":
+    msg = "olá, Python"
+elif current_language == "it_IT":
+    msg = "ciao, Python"
+
+print(msg)
