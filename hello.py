@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-
+ #!/usr/bin/env python3
+ 
 """ Hello Python
 
 Como usar:
@@ -25,4 +25,4 @@ if current_language == "pt_BR":
 elif current_language == "it_IT":
     msg = "ciao, Python"
 
-print(msg)
+print(msg) 
