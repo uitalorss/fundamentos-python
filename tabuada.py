@@ -10,7 +10,8 @@ __author__ = "Uítalo"
 numeros = list(range(1, 11))
 
 for multiplicando in numeros:
-    print("Tabuada do número:", multiplicando)
+    print("{:-^25}".format(f" Tabuada do {multiplicando} "))
     for multiplicador in numeros:
-        print(multiplicando, "*", multiplicador, "=", multiplicando * multiplicador)
-    print("----------------------------------")
+        resultado = multiplicando * multiplicador
+        print("{:^25}".format(f"{multiplicando} * {multiplicador} = {resultado}"))
+    print("#" * 25)
