@@ -15,6 +15,39 @@ python3 -m pip install --upgrade pip
 python3 -m pip install nomeDoPacote
 ```
 
+# Tipos de dados
+
+### Simples
+### Compostos
+**Tupla**
+- Forma de atribuição: ```cores = red, green, blue``` ou ```cores = (red, green, blue)```
+    > Há casos em que a atribuição de uma tupla é obrigatória envolver entre parênteses, como na interpolação de strings.
+- Uma tupla é **imutável**, ou seja, uma vez atribuída, não é possível adicionar, remover ou alterar os dados dentro da tupla.
+- Quando necessário acessar o item em uma tupla, basta passar a sua posição entre colchetes. Exemplo: ```print(cores[0])```
+- O método de desempacotar uma tupla é interessante para tirar valores de uma lista e atribuir a variáveis.
+```
+pontos = 4, 1, 50
+x, y, z = pontos
+
+print(x)
+> 4
+print(y)
+> 1
+print(z)
+> 50
+```
+
+**Lista**
+- Bastante similar aos arrays de outras linguagens de programação.
+- Diferente das tuplas, as listas são **mutáveis**. Sendo assim permitidas a manipulação dos itens da lista.
+- Comporta itens de qualquer tipo.
+```
+users = []
+colors = ["red", "green"]
+```
+
+
+
 # Modelos de formatação
 - Concatenação
 
