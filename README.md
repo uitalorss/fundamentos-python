@@ -84,7 +84,49 @@ conjunto = {1, 2, 3} ou conjunto = set(1, 2, 3) - A segunda opção é mais reco
     print(conjunto_a ^ conjunto_b)
     > {1, 2, 3, 6, 7, 8}
     ```
+
 **Dicionário**
+    
+- É um tipo de dado iterável que armazena conjuntos de dados tipo chave e valor.
+    - É possível armazenar praticamente qualquer tipo de dado como valor, inclusive outro dicionário.
+- É mutável.
+- Assim como o *set*, ele não permite chaves duplicadas.
+
+- Forma de criação
+    
+```
+pessoa = {
+    "nome": "João"
+    "sobrenome": "Da Silva"
+    "idade": 28
+    "filhos": False
+}
+```
+
+- Retornando dados de um dicionário
+
+```
+print(pessoa["nome"])
+```
+
+- Adicionando itens no dicionário
+
+```
+pessoa["cidade natal"] = Salvador
+pessoa["nome"] = João José // Nesse caso ele irá acessar o dicionário e alterar a chave correspondente, já que ele já existe.
+```
+
+- excluir itens no dicionário
+```
+del pessoa["cidade natal"]
+```
+
+- Retornar dados como tuplas
+```
+print(pessoa.items())
+> ([("nome", "João José"), ("sobrenome", "Da Silva"), ("idade", 28), ("filhos", False)])
+```    
+
 
 
 # Modelos de formatação
