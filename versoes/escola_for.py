@@ -6,8 +6,6 @@ Exibir relatório de crianças por atividade.
 - Imprimir uma lista de crianças agrupadas por sala que frequentam cada uma das atividades.
 """
 
-__version__ = "0.2.0"
-
 sala1 = ["Erick", "Maia", "Gustavo", "Manoel", "Sofia", "Joana"]
 sala2 = ["João", "Antonio", "Carlos", "Maria", "Isabela"]
 
@@ -19,8 +17,14 @@ atividades = [("Inglês", aula_ingles), ("Música", aula_musica), ("Dança", aul
 
 
 for nomeAtividade, atividade in atividades:
-    atividadesSala1 = set(atividade) & set(sala1)
-    atividadesSala2 = set(atividade) & set(sala2)
+    atividadesSala1 = []
+    atividadesSala2 = []
+    
+    for aluno in atividade:
+        if(aluno in sala1):
+            atividadesSala1.append(aluno)
+        else:
+            atividadesSala2.append(aluno)
 
     print("{:#^50}".format(f" Aula de {nomeAtividade} "))
     print("{:#^50}".format(" Sala 1 "))

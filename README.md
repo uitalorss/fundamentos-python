@@ -45,7 +45,46 @@ print(z)
 users = []
 colors = ["red", "green"]
 ```
+**Set**
+- É um tipo de dado que recebem elementos **iteráveis**, como tuplas e listas.
+- O set cria uma lista *não ordenada* de elementos **únicos**, não permitindo repetições.
+    - A melhor usabilidade do set é voltado a pegar um dado iterável e remover as duplicatas existentes.
+- Pode ser criado vazio e ir adicionando elementos.
 
+- Forma de criação
+```
+conjunto = {1, 2, 3} ou conjunto = set(1, 2, 3) - A segunda opção é mais recomendada.
+```
+- Operações
+    - União: Essa operação une dois ou mais conjuntos, eliminando as repetições.
+    ```
+    conjunto_a = set((1, 2, 3, 4, 5))
+    conjunto_b = set((4, 5, 6, 7, 8))
+    print(conjunto_a|conjunto_b)
+    > {1, 2, 3, 4, 5, 6, 7, 8}
+    ```
+    - Interseção: A operação retorna um set com os dados que estão em todos os conjuntos envolvidos na operação.
+    ```
+    print(conjunto_a & conjunto_b)
+    > {4, 5}
+    ```
+
+    - Diferença: A operação retorna um set com os dados que não estão em um conjunto em relação a outro.
+        - Nessa operação a ordem importa, pois os resultados de um set para outro serão diferentes.
+    ```
+    print(conjunto_a - conjunto_b)
+    > {1, 2, 3}
+
+    print(conjunto_b - conjunto_a)
+    > {6, 7, 8}
+    ```
+
+    - Diferença simétrica: A operação que é o oposto da interseção, retornando um set com os dados que não são presentes nos dois sets.
+    ```
+    print(conjunto_a ^ conjunto_b)
+    > {1, 2, 3, 6, 7, 8}
+    ```
+**Dicionário**
 
 
 # Modelos de formatação
