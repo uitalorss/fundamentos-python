@@ -10,18 +10,19 @@ Execução:
     python3 hello.py ou ./hello.py
 """
 
-__version__ = "0.1.1"
+__version__ = "0.0.1"
 __author__ = "Uítalo Souza"
 __license__ = "Unlicense"
 
 import os
 
-current_language = os.getenv("LANG", "en_US")[:5]
-msg = {
-    "en_US": "Hello Python",
-    "pt_BR": "Olá Python",
-    "it_IT": "Ciao Python",
-    "fr_FR": "Bonjour Python"
-}
+current_language = os.getenv("LANG")[:5]
+msg = "hello Python"
 
-print(msg[current_language]) 
+
+if current_language == "pt_BR":
+    msg = "olá, Python"
+elif current_language == "it_IT":
+    msg = "ciao, Python"
+
+print(msg) 
