@@ -1,13 +1,13 @@
 # fundamentos-python
 
-#Configuração de ambiente virtual
+### Configuração de ambiente virtual
 ```
 python3 -m venv .venv
 source .venv/bin/activate
 
 ```
 
-#Atualização do gerenciador de pacotes pip e instalação de pacotes
+### Atualização do gerenciador de pacotes pip e instalação de pacotes
 
 ```
 python3 -m pip install --upgrade pip
@@ -130,7 +130,7 @@ print(pessoa.items())
 
 
 # Modelos de formatação
-- Concatenação
+**Concatenação**
 
 ```print("Uítalo " + "Souza")```
 
