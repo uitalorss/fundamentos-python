@@ -13,16 +13,12 @@ div -> /
 Uso: 
 $ infixcalc.py sum 5 2
 > 7
-
-O histórico de operações deverá ser salvo em `infixcalc.log`
 """
 
-__version__ = "0.1.1"
+__version__ = "0.1.0"
 
-import os
 import sys
 import operator
-from datetime import datetime
 
 operations = {
     "sum": operator.add,
@@ -65,11 +61,5 @@ n1, n2 = validated_nums
 
 functional_operator = operations[operator]
 total = functional_operator(n1, n2)
-
-path = os.curdir
-filepath = os.path.join(path, "infixcalc.log")
-
-with open(filepath, "a") as log:
-    log.write(f"{n1} {operator} {n2} = {total} {datetime.now().isoformat()},\n")
 
 print(total)

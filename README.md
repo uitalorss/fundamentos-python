@@ -151,3 +151,94 @@ status = "inativo"
 
 print(f"Bem-vindo, {nome}, seu status atual é {status}.")
 ```
+# Manipulando arquivos e pastas
+
+```
+import os
+# listar itens em um diretório
+os.listdir(".")
+
+    # Para resolver possíveis problemas de compatibilidade, pode substituir o "." por os.curdir
+    os.listdir(os.curdir)
+
+# Criar diretório
+os.mkdir("outroDiretorio")
+os.makedirs("outroDiretorio", exist_ok=True)
+
+# mudar de diretório
+os.chdir("outroDiretorio")
+
+# Resolvendo problemas de mudança de diretório para SO's distintos.
+path = os.path.join("diretorio", "diretorioAbaixo")
+
+# Criar arquivos
+os.mknod("arquivo.py")
+
+    # Criar Arquivos diretamente em pastas abaixo
+    os.mknod(os.path.join(path, "arquivo.py"))
+
+
+# Retornar o nome do arquivo de um diretório
+os.path.basename(filepath)
+```
+
+**Lendo e escrevendo arquivos**
+```
+filepath = os.path.join(os.curdir, arquivo.txt)
+
+# Para manipular arquivos é necessário o file descriptor open, essa função espera o nome do arquivo e um argumento que dirá o que o file descriptor fará.
+
+# Escrever arquivos
+    Para escrever arquivos é chamado o file descriptor open, que recebe o endereço do arquivo e o argumento "w".
+    # Forma direta.
+        # Nesse modo é passado diretamente a função write, habilitada pelo argumento "w", que recebe o conteúdo que será escrito no arquivo e fecha o file descriptor após escrever o arquivo.
+        
+        open(filepath, "w").write("Olá")
+
+    # Atribuindo a variável
+        # Aqui, será criada uma variável que receberá a função open e apartir da variável, a função write será chamada.
+        # É necessário depois executar a função close para fechar o file descriptor.
+        
+        arquivo = open(filepath, "w")
+        arquivo.write("Olá")
+        arquivo.close()
+
+    ! Após escrever em um arquivo, caso deseje escrevê-lo novamente, o conteúdo será substituído.
+    ! Para escrever arquivos de forma incremental, o segundo argumento a ser passado será o "a" de append.
+
+        # Para não ser necessário a chamada da função close, é necessário criar esse processo dentro do gerenciado de contexto with.
+        # Essa é a forma comumente usada para escrita de arquivos.
+        with open(filepath, "a") as arquivo:
+            arquivo.write(" Python")
+
+    # Escrever arquivos a partir de uma lista
+    # É possível passar uma lista de itens para um arquivo atraves da função writelines.
+    list = ["Olá\n", "Python\n", "Uma linguagem muito interessante\n"]
+
+    with open(filepath, "a") as arquivo:
+        arquivo.writelines(list)
+
+# Ler arquivos
+    # Para escrever arquivos é chamado o file descriptor open, que recebe o endereço do arquivo e o argumento "r".
+    
+    # Forma direta.
+        # É possível fazer diretamente usando o print e dentro passando o file descriptor com o endereço do arquivo, o argumento "r" e em seguida chamado a função read().
+        
+        print(open(filepath, "r").read("Olá"))
+
+    # Atribuindo a variável
+        # Aqui, será criada uma variável que receberá a o file descriptor open e apartir da variável a função read será chamada.
+        
+        arquivo = open(filepath, "r")
+        print(arquivo.read("Olá"))
+    
+    ! Após a leitura do arquivo, caso tente lê-lo de novo ele retornará em branco, pois a leitura percorreu todo o texto, sendo necessário atribuir a variável o file descriptor novamente.
+    ! Foi feita usando o print para retornar o valor do arquivo em tela, mas em desenvolvimento ou produção, caso não seja necessário imprimir em tela, pode ser feita a leitura do arquivo sem a necessidade da função print.
+
+    arquivo.read("Olá")
+
+    # Ler arquivos como uma lista
+    # É possível passar uma lista de itens para um arquivo atraves da função readlines.
+
+    print(arquivo.readlines())
+ ```
