@@ -242,3 +242,44 @@ filepath = os.path.join(os.curdir, arquivo.txt)
 
     print(arquivo.readlines())
  ```
+
+# Tratamento de erros com exceptions
+
+```
+try:
+    execução a ser feita.
+except:
+    print(mensagem de erro a ser exibida.)
+```
+
+**Configurando exceções para diferentes erros**
+Pode haver casos dentro de um bloco try em que um outro erro ocorra e as exceções tem que estar devidamente configuradas para capturar o erro e exibir a mensagem corretamente.
+
+```
+try:
+    names = open("names.txt").readlines()
+    print 1/0
+except FileNotFoundError:
+    print("Mensagem de erro.")
+    sys.exit(1)
+except ZeroDivisionError:
+    print("Mensagem de erro.")
+    sys.exit(1)
+```
+
+**Capturando o objeto do erro**
+É possível e recomendado capturar o objeto de erro e assim manipular e enviar para o usuário da seguinte forma.
+
+```
+try:
+    names = open("names.txt").readlines()
+    print 1/0
+except FileNotFoundError as e:
+    print(f"{str(e)}")
+    sys.exit(1)
+```
+
+**Outras expressões**
+
+- else: Será executado sempre que o try for resolvido sem problemas.
+- finally: Será executado independente de cair em exceção ou não.
