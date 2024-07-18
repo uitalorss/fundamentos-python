@@ -1,0 +1,3 @@
+Maria,maria@gmail.com
+João,joao.santana@gmail.com
+José,jsouza@outlook.com

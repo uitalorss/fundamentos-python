@@ -1,0 +1,13 @@
+Para: %(email)s
+
+Olá, %(nome)s
+
+Tem interesse em comprar %(produto)s ?
+
+Clique agora em %(link)s
+
+Apenas %(quantidade)d unidades disponíveis.
+
+preço promocional: R$ %(preco).2f
+
+_______________________________________________________
