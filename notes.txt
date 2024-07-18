@@ -1,0 +1,2 @@
+note	teste	teste
+nota2	tech	olá python
