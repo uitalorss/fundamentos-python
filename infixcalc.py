@@ -45,10 +45,6 @@ elif len(arguments) != 3:
     
 operator, *nums = arguments
 
-if operator not in operations:
-    print("Operação inválida.")
-    sys.exit(1)
-
 validated_nums = []
 for num in nums:
     if not num.replace(".", "").isdigit():
@@ -62,9 +58,14 @@ for num in nums:
 
 n1, n2 = validated_nums
 
+try:
+    functional_operator = operations[operator]
+except KeyError:
+    print("Please send a valid operation `sum/sub/mul/div`")
+    sys.exit(1)
 
-functional_operator = operations[operator]
 total = functional_operator(n1, n2)
+
 
 path = os.curdir
 filepath = os.path.join(path, "infixcalc.log")

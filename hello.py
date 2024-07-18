@@ -9,10 +9,14 @@ __license__ = "Unlicense"
 import os
 import sys
 
-arguments = {"lang": None, "count": None }
+arguments = {"lang": None, "count": 1 }
 
 for arg in sys.argv[1:]:
-    key, value = arg.split("=")
+    try:
+        key, value = arg.split("=")
+    except ValueError:
+        print("[Error] Sintaxe errada. `--key=value`")
+        sys.exit(1)
     key = key.lstrip("-").strip()
     value = value.strip()
 
@@ -24,12 +28,12 @@ for arg in sys.argv[1:]:
 current_language = arguments["lang"]
 
 if current_language is None:
-    current_language = os.getenv("LANG")
-    if current_language is None:
+    if "LANG" in os.environ:
+        current_language = os.getenv("LANG")
+    else:
         current_language = input("Choose a language: ")
 
-if arguments["count"] is None:
-    arguments["count"] = 1
+current_language = current_language[:5]
 
 msg = {
     "en_US": "Hello Python",
@@ -38,4 +42,11 @@ msg = {
     "fr_FR": "Bonjour Python"
 }
 
-print(msg[current_language] * int(arguments["count"])) 
+try:
+    print(msg[current_language] * int(arguments["count"])) 
+except ValueError:
+    print("Please send a number in --count=")
+    sys.exit(1)
+except KeyError:
+    print(f"Please send a valid language, choose from {list(msg.keys())}")
+    sys.exit(1)
