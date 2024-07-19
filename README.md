@@ -152,96 +152,105 @@ status = "inativo"
 print(f"Bem-vindo, {nome}, seu status atual é {status}.")
 ```
 # Manipulando arquivos e pastas
+Para fazer manipulação de arquivos em um programa python é necessário importar a biblioteca *os* usando a instrução `import os`, que vai permitir que sejam feitos comandos de manipulação de arquivos e pastas e efetuar leitura e escrita de arquivos.
+
+## Comandos iniciais para navegação entre pastas e criação de arquivos.
+- listar itens em um diretório
+```
+os.listdir(".")
+```
+- Criar um diretório
 
 ```
-import os
-# listar itens em um diretório
-os.listdir(".")
-
-    # Para resolver possíveis problemas de compatibilidade, pode substituir o "." por os.curdir
-    os.listdir(os.curdir)
-
-# Criar diretório
 os.mkdir("outroDiretorio")
 os.makedirs("outroDiretorio", exist_ok=True)
-
-# mudar de diretório
+```
+- Mudar de diretório
+```
 os.chdir("outroDiretorio")
 
-# Resolvendo problemas de mudança de diretório para SO's distintos.
+```
+- Resolvendo problemas de mudança de diretório para SO's distintos.
+    - Essa opção é útil, pois o modo de informar a mudança de diretório no Linux se usa a `/`, enquanto no windows é usado o `\`. Para resolver a situação o comando abaixo concatena as pastas e retorna o endereço corretamente para cada um dos SO's.
+
+```
 path = os.path.join("diretorio", "diretorioAbaixo")
-
-# Criar arquivos
+```
+- Criar arquivos
+```
 os.mknod("arquivo.py")
+```
+- Criar Arquivos diretamente em um diretório abaixo
+```
+os.mknod(os.path.join(path, "arquivo.py"))
+```
 
-    # Criar Arquivos diretamente em pastas abaixo
-    os.mknod(os.path.join(path, "arquivo.py"))
-
-
-# Retornar o nome do arquivo de um diretório
+- Retornar o nome do arquivo de um diretório
+```
 os.path.basename(filepath)
 ```
+## Lendo e escrevendo arquivos
+Para manipular arquivos é necessário o *file descriptor* `open`, essa função espera o endereço do arquivo e um argumento que dirá o que o file descriptor fará.
 
-**Lendo e escrevendo arquivos**
+- Como exemplo, foi criada uma variável chamada **filepath** que recebe o endereço de um arquivo chamado `arquivo.txt`.
+
 ```
 filepath = os.path.join(os.curdir, arquivo.txt)
+```
 
-# Para manipular arquivos é necessário o file descriptor open, essa função espera o nome do arquivo e um argumento que dirá o que o file descriptor fará.
+### Escrita de arquivos
+Para escrever arquivos é chamado o file descriptor `open`, que recebe o endereço do arquivo e o argumento `"w"`. Há duas formas de serem feitas a escrita em arquivos.
+- Forma direta: Nesse modo é passado diretamente a função write, habilitada pelo argumento `"w"`, que recebe o conteúdo que será escrito no arquivo e fecha o file descriptor após escrevê-lo.
 
-# Escrever arquivos
-    Para escrever arquivos é chamado o file descriptor open, que recebe o endereço do arquivo e o argumento "w".
-    # Forma direta.
-        # Nesse modo é passado diretamente a função write, habilitada pelo argumento "w", que recebe o conteúdo que será escrito no arquivo e fecha o file descriptor após escrever o arquivo.
-        
-        open(filepath, "w").write("Olá")
+```
+open(filepath, "w").write("Olá")
+```
 
-    # Atribuindo a variável
-        # Aqui, será criada uma variável que receberá a função open e apartir da variável, a função write será chamada.
-        # É necessário depois executar a função close para fechar o file descriptor.
-        
-        arquivo = open(filepath, "w")
-        arquivo.write("Olá")
-        arquivo.close()
+- Atribuição à variável: Aqui, será criada uma variável que receberá a função `open` e apartir da variável, a função write será chamada.
+    - É necessário depois executar a função `close` para fechar o file descriptor.
 
-    ! Após escrever em um arquivo, caso deseje escrevê-lo novamente, o conteúdo será substituído.
-    ! Para escrever arquivos de forma incremental, o segundo argumento a ser passado será o "a" de append.
+```
+arquivo = open(filepath, "w")
+arquivo.write("Olá")
+arquivo.close()
+```
+**Observações**
+- Utilizando o argumento `"w"` no file descriptor o conteúdo será *substituído* toda vez que a função `write` for executada, para escrever arquivos de forma incremental, o segundo argumento a ser passado será o `"a"` de append.
 
-        # Para não ser necessário a chamada da função close, é necessário criar esse processo dentro do gerenciado de contexto with.
-        # Essa é a forma comumente usada para escrita de arquivos.
-        with open(filepath, "a") as arquivo:
-            arquivo.write(" Python")
+- Uma forma mais comum atualmente de se fazer a escrita de arquivo é utilizando o *gerenciador de contextos* `with`. Dessa forma é possível atribuir o file descriptor para uma variável e efetuar a escrita sem a necessidade de fechá-lo.
+```
+with open(filepath, "a") as arquivo:
+    arquivo.write(" Python")
+```
+- É possível também escrever arquivos a partir de uma lista e escrever em mais de uma linha usando essa lista através da função `writelines`
+```
+list = ["Olá\n", "Python\n", "Uma linguagem muito interessante\n"]
 
-    # Escrever arquivos a partir de uma lista
-    # É possível passar uma lista de itens para um arquivo atraves da função writelines.
-    list = ["Olá\n", "Python\n", "Uma linguagem muito interessante\n"]
+with open(filepath, "a") as arquivo:
+    arquivo.writelines(list)
+```
 
-    with open(filepath, "a") as arquivo:
-        arquivo.writelines(list)
+### Leitura de arquivos
+Para ler arquivos é chamado o *file descriptor* `open`, que recebe o endereço do arquivo e o argumento `"r"`. Como na escrita, há mais de uma forma de ler arquivos.
 
-# Ler arquivos
-    # Para escrever arquivos é chamado o file descriptor open, que recebe o endereço do arquivo e o argumento "r".
-    
-    # Forma direta.
-        # É possível fazer diretamente usando o print e dentro passando o file descriptor com o endereço do arquivo, o argumento "r" e em seguida chamado a função read().
-        
-        print(open(filepath, "r").read("Olá"))
+- Forma direta: É possível fazer diretamente usando o `print` e dentro passando o *file descriptor* com o endereço do arquivo, o argumento `"r"` e em seguida chamado a função `read()`.
+```
+print(open(filepath, "r").read("Olá"))
+```
 
-    # Atribuindo a variável
-        # Aqui, será criada uma variável que receberá a o file descriptor open e apartir da variável a função read será chamada.
-        
-        arquivo = open(filepath, "r")
-        print(arquivo.read("Olá"))
-    
-    ! Após a leitura do arquivo, caso tente lê-lo de novo ele retornará em branco, pois a leitura percorreu todo o texto, sendo necessário atribuir a variável o file descriptor novamente.
-    ! Foi feita usando o print para retornar o valor do arquivo em tela, mas em desenvolvimento ou produção, caso não seja necessário imprimir em tela, pode ser feita a leitura do arquivo sem a necessidade da função print.
+- Atribuição à variável: Aqui, será criada uma variável que receberá a o file descriptor open e apartir da variável a função read será chamada.
 
-    arquivo.read("Olá")
-
-    # Ler arquivos como uma lista
-    # É possível passar uma lista de itens para um arquivo atraves da função readlines.
-
-    print(arquivo.readlines())
- ```
+```
+arquivo = open(filepath, "r")
+print(arquivo.read("Olá"))
+```
+**Observações**
+- Após a leitura do arquivo, caso tente lê-lo de novo ele retornará em branco, pois a leitura percorreu todo o texto, sendo necessário atribuir a variável o file descriptor novamente.
+- Foi feita usando o print para retornar o valor do arquivo em tela, mas em desenvolvimento ou produção, caso não seja necessário imprimir em tela, pode ser feita a leitura do arquivo sem a necessidade da função print. Ex: `arquivo.read("Olá")`
+- É possível passar uma lista de itens para um arquivo atraves da função `readlines()`.
+```
+print(arquivo.readlines())
+```
 
 # Tratamento de erros com exceptions
 
@@ -283,3 +292,76 @@ except FileNotFoundError as e:
 
 - else: Será executado sempre que o try for resolvido sem problemas.
 - finally: Será executado independente de cair em exceção ou não.
+
+# Logging
+
+```
+logging.debug("Mensagem pro dev, QA, sysadmin")
+logging.info("Mensagem geral para os usuários")
+logging.warning("Aviso que não causa erro.")
+logging.error("Erro que afeta uma única execução")
+logging.critical("Erro que afeta todo o sistema. Ex: O banco de dados sumiu")
+```
+
+É possível ajustar:
+- level: por padrão as mensagens de *debug* e *info* não são exibidas, mas forçando a usar o modo de debug, essas mensagens passarão a ser exibidas.
+
+- formatação: É possível ajustar o modo como a mensagem será exibida.
+
+- destino: Assim, pode-se customizar para onde a mensagem de log será exibida.
+
+Para fazer essas alterações é necessário criar uma instância de log própria.
+```
+log = loggin.Logger("logs.py, logging.DEBUG)
+```
+
+# Condicionais
+Condicionais são usadas para executar diferentes blocos de código com base em certas condições. São utilizadas as palavras chave `if`, `elif` e `else`.
+- O `if` é usado para iniciar um bloco de condição baseado em uma verificação booleana. Se a condição for verdadeira, o bloco interno é executado.
+```
+n1 = 4
+n2 = 6
+
+if n2 > n1:
+    print(f"O número {n2} é maior")
+```
+
+- O `elif` é chamado caso a condição inicial não seja atendida e exista uma outra condição a ser testada.
+```
+n1 = 6
+n2 = 6
+
+if n2 > n1:
+    print(f"O número {n2} é maior.")
+elif n2 == 1:
+    print("Os números são iguais.")
+```
+
+- Por fim o `else` só é invocado caso a(s) condição(ões) não seja(m) atendida(s).
+```
+n1 = 6
+n2 = 3
+
+if n2 > n1:
+    print(f"O número {n2} é maior.")
+elif n2 == 1:
+    print("Os números são iguais.")
+else:
+    print(f"O número {n2} é menor")
+```
+
+## Condicionais ternárias
+Quando o objetivo da condição é apenas atribuir valor a uma variável ou imprimir um valor pode-se deixar a condicional `if` mais simples.
+```
+n1 = 4
+n2 = 6
+
+valor = "é maior" if n2 > n1 else "é menor"
+```
+
+É possível também operar com condicionais ternárias para atribuir valor através do operador `or` que opera através de *expressões lógicas* onde caso a variável tenha valor falso, usa a opção padrão definida na instrução.
+
+```
+nome = "José"
+print(f"Olá {nome or "pessoa"}, tudo bem com você?")
+```
