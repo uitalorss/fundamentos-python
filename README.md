@@ -365,3 +365,106 @@ valor = "é maior" if n2 > n1 else "é menor"
 nome = "José"
 print(f"Olá {nome or "pessoa"}, tudo bem com você?")
 ```
+
+# Repetições
+
+### While
+É a estrutura de repetição usada para executar um bloco de código enquanto uma condição seja verdadeira. Ao contrário do for que iterá sobre uma sequência, o while continua executando enquanto até que a condição se torne falsa.
+
+Estrutura básica
+```
+n = 0
+while n < 5:
+    print(n)
+    n += 1 # Irá imprimir todos os números de 0 a 4, pois a condição de parada do bloco é n ser menor que 5.
+```
+- Essa condição que faz o while parar de executar é chamada de *condição de parada*, se isso não for definido, o bloco continuará rodando em um loop infinito, pois não há uma condição onde ela se torne falsa, como no exemplo abaixo.
+
+```
+while True:
+    print("olá!!") # Esse código rodará em loop infinito.
+```
+**Palavras-chave**
+- `break`: Interrompe o loop.
+
+```
+n = 0
+while n < 10:
+    if i == 5:
+        break
+    print(i)  # Imprime de 0 a 4
+```
+
+- `continue`: Pula a iteração atual e vai para a próxima.
+```
+n = 0
+while n < 10:
+    if i % 2 == 0:
+        continue
+    print(i)  # Irá imprimir apenas os números ímpares de 0 a 9
+```
+
+- É possível também que a condição de parada de um loop em while seja um dado recebido de um input.
+
+```
+while True:
+    entrada = input("Digite um número (ou 'sair' para finalizar): ")
+    if entrada.lower() == 'sair':
+        break
+    if not entrada.isdigit():
+        print("Entrada inválida. Tente novamente.")
+        continue
+    numero = int(entrada)
+    print(f"Você digitou o número: {numero}")
+
+```
+
+
+
+### For
+É a estrutura de repetição usada para iterar sobre uma sequência (strings, listas, tuplas, dicionários e conjuntos) ou qualquer objeto iterável.
+
+Tipos de uso
+
+- Iteração sobre uma lista
+```
+frutas = ["maça", "banana", "abacaxi"]
+for fruta in frutas:
+    print(fruta) 
+```
+
+- Iteração sobre uma string
+```
+fruta = "Banana"
+for letra in fruta:
+    print(letra)
+```
+
+- Iteração usando um `range`
+    - um `range` gera uma sequencia de números que pode onde a sintaxe básica é (`start`, `stop`, `step`), onde é informado o número com condição para iniciar, outro para parar e um número final opcional para pular a quantidade indicada.
+    - O `range` pode também receber apenas um número e representará os números de 0 até o algarismo anterior ao informado.
+```
+for item in range(10): 
+    print(item) # irá imprimir uma sequência de números de 0 a 9.
+
+print item in range(1, 10, 2):
+    print(item) # irá imprimir uma sequência de números de 0 a 9 pulando de 2 em 2.
+```
+
+**Palavras-chave**
+- `break`: Interrompe o loop.
+
+```
+for i in range(10):
+    if i == 5:
+        break
+    print(i)  # Imprime de 0 a 4
+```
+
+- `continue`: Pula a iteração atual e vai para a próxima.
+```
+for i in range(10):
+    if i % 2 == 0:
+        continue
+    print(i)  # Irá imprimir apenas os números ímpares de 0 a 9
+```
