@@ -103,19 +103,29 @@ Se outro usuário tentar reservar o mesmo quarto o programa deverá exibir uma m
 
 """
 
-bedroom_filepath = os.path.join(os.curdir, "quartos.txt")
-booking_filepath = os.path.join(os.curdir, "reserva.txt")
+bedroom_file = "quartos.txt"
+booking_file = "reserva.txt"
 bedrooms = {}
-bookings = []
+bookings = {}
 
 try:
-    for line in open(bedroom_filepath):
-        num, description, price, available = line.split(",")
-        available = available.replace("\n", "")
-        bedrooms[num] = {
+    for line in open(booking_file):
+        customer,book,days = line.strip().split(",")
+        bookings[int(book)] = {
+            "customer": customer,
+            "days": days 
+        }
+except FileNotFoundError:
+    print("Arquivo não encontrado")
+    sys.exit(1)
+
+try:
+    for line in open(bedroom_file):
+        num, description, price = line.strip().split(",")
+        bedrooms[int(num)] = {
             "description": description,
             "price": float(price),
-            "available": available
+            "available": False if int(num) in bookings else True
         }
 except FileNotFoundError:
     print("Arquivo não encontrado")
@@ -125,19 +135,23 @@ print("Hotel Pythonico")
 print("")
 print("Quartos disponíveis")
 print("*" * 50)
-for codigo, dados in bedrooms.items():
-    description = dados["description"]
-    price = dados["price"]
-    available = dados["available"]
-    if dados["available"] == "True":
-        print(f"{codigo} - {description} - {price}\n")
-print("")
+if len(bookings) == len(bedrooms):
+    print("Todos os quartos estão ocupados.")
+    sys.exit(0)
+else:
+    for codigo, dados in bedrooms.items():
+        description = dados["description"]
+        price = dados["price"]
+        available = dados["available"]
+        if dados["available"] == True:
+            print(f"{codigo} - {description} - {price}\n")
+    print("")
 
 while True:
-    bedroom_to_reserve = input("Informe o número do quarto: ")
-    if bedroom_to_reserve not in bedrooms.keys() or not bedroom_to_reserve.isdigit():
+    bedroom_to_reserve = int(input("Informe o número do quarto: "))
+    if bedroom_to_reserve not in bedrooms or not str(bedroom_to_reserve).isdigit():
         print("Número de quarto inválido.")
-    elif bedrooms[bedroom_to_reserve]["available"] == "False":
+    elif bedrooms[bedroom_to_reserve]["available"] == False:
         print("Quarto já reservado.")
     else:
         break
@@ -167,17 +181,9 @@ while True:
         print("Favor informar um nome válido.")
 
 try:
-    with open(booking_filepath, "a") as booking:
+    with open(booking_file, "a") as booking:
         booking.write(f"{customer_name},{bedroom_to_reserve},{amount_days}\n")
-    bedrooms[bedroom_to_reserve]["available"] = "False"
-    print("Reserva Efetuada com sucesso.")
+        print("Reserva Efetuada com sucesso.")
 except:
     print("Reserva não efetuada.")
     sys.exit(1)
-
-update_bedrooms = ""
-for codigo, dados in bedrooms.items():
-    update_bedrooms += codigo + "," + dados["description"] + "," + str(dados["price"]) + "," + dados["available"] + "\n"
-
-with open(bedroom_filepath, "w") as data:
-    data.write(update_bedrooms)
