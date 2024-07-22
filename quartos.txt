@@ -1,0 +1,4 @@
+1,Suite Master,500.0,False
+2,Quarto Família,200.0,False
+3,Quarto Single,100.0,False
+4,Quarto Simples,50.0,False
