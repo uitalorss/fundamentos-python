@@ -468,3 +468,72 @@ for i in range(10):
         continue
     print(i)  # Irá imprimir apenas os números ímpares de 0 a 9
 ```
+# Funções
+
+**Anatomia de uma função**
+- Definição ou atribuição: Atribuição do nome da função antecedido por `def` para sinalizar que é uma função
+- Assinatura: Tudo o que estiver entre o nome da função e os `:`
+    - Aqui serão informados os parâmentro e anotações de tipo
+    - Os parâmetros podem ser posicionais e nomeados.
+        - Os posicionais seguem a ordem definida na função, os nomeados é passado o parâmetro atribuindo um valor
+        - Os argumentos podem ser passados também empacotando-os, caso os valores estejam em uma tupla. Nesse caso, os valores são passados de forma posicional.
+        - Nos casos dos dicionários, eles são passados de forma nomeada
+- Documentação: Um pequeno texto descrevendo o que a função faz.
+- Valor de retorno: Quando precisar ser retornado mais de um valor, pode ser feito através de uma tupla.
+
+**Sintaxe básica**
+
+```
+def soma(x, y ): # assinatura da função
+    return x + y # corpo da função
+```
+- Em python toda função retorna alguma coisa, caso não seja atribuído um retorno, seu retorno será *None*.
+    - Funções que não retornam nada são chamadas de procedimentos ou *procedures*.
+- Em python, assim como em outras linguagens, é importante seguir o princípio de cada função ter apenas uma responsabilidade.
+- Justamente por conta da premissa de cada função ter uma única responsabilidade, usá-las ajuda a manter o código organizado e de fácil leitura.
+
+
+
+### Funções built-in
+
+**Funções em itens iteráveis**
+- `sum()`: retorna a soma de todos os valores.
+- `max()`: retorna o maior valor.
+- `min()`: retorna o menor valor.
+- `len()`: retorna a quantidade de valores em uma coleção.
+- `reversed()`: retorna a coleção com a ordem inversa da original.
+- `sorted()`: Retorna uma lista com todos os itens organizados segundo a tabela ASCII
+
+**Funções voltadas a programação funcional**
+- `filter()`: 
+- `map()`:
+- `all()`:
+- `enumerate()`:
+- `zip()`:
+
+### Funções da biblioteca padrão do Python
+
+- random
+    - `random.random()`: Retorna um número entre 0.0 e 1.0
+    - `random.randint(ini, fim)`: Retorna um número inteiro entre o range passado como argumento.
+    - `random.choice(colecao)`: Retorna um item aleatório dentro de dentro de uma coleção.
+    - `random.sample(colecao, items)`: Retorna a quantidade de items informada de dentro de uma coleção.
+    - `random.shuffle(colecao)`: Embaralha uma coleção inclusive alterando a variável passada
+
+- itertools
+    - `itertools.cycle()`:
+    - `itertools.repeat()`:
+    - `itertools.accumulate()`:
+    - `itertools.product()`:
+    - `itertools.permutation()`:
+    - `itertools.combinations()`:
+
+- functools
+    - `functools.partial()`
+
+- statistics
+    - `statistics.mean()`: Calcula a média em uma coleção de valores
+    - `statistics.median()`: Calcula a mediana em uma coleção de valores
+
+- getpass
+    - `getpass.getpass()`: Usado para ser um input para senhas, essa função oculta o que está sendo digitado.
