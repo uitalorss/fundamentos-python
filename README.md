@@ -18,6 +18,51 @@ python3 -m pip install nomeDoPacote
 # Tipos de dados
 
 ### Simples
+**Números inteiros (`int`)**
+- Representam números inteiros, positivos ou negativos, sem parte decimal.
+
+**Números de ponto flutuante (`float`)**
+- Representam números reais com parte decimal.
+
+    *Operações básicas:* **int e float**
+    - Operações aritméticas: `+`, `-`, `*`, `/`, `//`(divisão inteira), `%` (módulo), `**`exponenciação
+
+**Strings (`str`)**
+- Representam sequência de caracteres, usadas para armazenar texto.
+- Podem ser delimitadas por aspas simples `'` ou aspas duplas `"`.
+    
+    *Operações básicas:*
+    - Concatenação: `+`
+    - Repetição: `*`
+    - indexação ou fatiamento: `[]`, `[:]`
+
+**Booleanos (`bool`)**
+- Representam valores verdadeiro `True` ou falso `False`.
+- São úteis em operações lógicas e condicionais.
+
+    *Operações básicas:*
+    - Operações lógicas: `and`, `or`, `not`
+    - Comparações: `==`, `!=`, `<` , `>`, `<=`, `>=`
+
+**Nulos (`NoneType`)**
+- Representam ausência de valor ou um valor nulo.
+- É usado para inicializar variáveis ou indicar que uma variável não tem valor atribuído.
+    *Operações básicas:*
+    - Comparação com `is` ou `is not`
+
+Exemplos:
+```
+valor = 15 # int
+
+total = 12.4 # float
+
+fruta = "Banana" # string
+
+available = True # bool
+
+nome = None # None
+```
+
 ### Compostos
 **Tupla**
 - Forma de atribuição: ```cores = red, green, blue``` ou ```cores = (red, green, blue)```
@@ -492,6 +537,7 @@ def soma(x, y ): # assinatura da função
 - Em python, assim como em outras linguagens, é importante seguir o princípio de cada função ter apenas uma responsabilidade.
 - Justamente por conta da premissa de cada função ter uma única responsabilidade, usá-las ajuda a manter o código organizado e de fácil leitura.
 
+**Funções Lambda**
 
 
 ### Funções built-in
