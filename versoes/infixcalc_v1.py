@@ -17,7 +17,7 @@ $ infixcalc.py sum 5 2
 O histórico de operações deverá ser salvo em `infixcalc.log`
 """
 
-__version__ = "0.1.2"
+__version__ = "0.1.1"
 
 import os
 import sys
@@ -25,10 +25,10 @@ import operator
 from datetime import datetime
 
 operations = {
-    "sum": lambda a, b: a + b,
-    "sub": lambda a, b: a - b,
-    "mul": lambda a, b: a * b,
-    "div": lambda a, b: a / b
+    "sum": operator.add,
+    "sub": operator.sub,
+    "mul": operator.mul,
+    "div": operator.truediv
 }
 
 arguments = sys.argv[1:]
@@ -59,12 +59,12 @@ for num in nums:
 n1, n2 = validated_nums
 
 try:
-    total = operations[operator](n1, n2)
+    functional_operator = operations[operator]
 except KeyError:
     print("Please send a valid operation `sum/sub/mul/div`")
     sys.exit(1)
 
-
+total = functional_operator(n1, n2)
 
 
 path = os.curdir
