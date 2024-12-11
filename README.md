@@ -583,3 +583,4 @@ def soma(x, y ): # assinatura da função
 
 - getpass
     - `getpass.getpass()`: Usado para ser um input para senhas, essa função oculta o que está sendo digitado.
+    teste
